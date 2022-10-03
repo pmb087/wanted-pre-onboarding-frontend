@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const login = styled.div`
+export const signUp = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +10,7 @@ export const login = styled.div`
   background-color: #fafafa;
 `;
 
-export const loginInner = styled.form`
+export const signUpInner = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,21 +19,21 @@ export const loginInner = styled.form`
   background-color: white;
 `;
 
-export const loginEmail = styled.input`
+export const signUpEmail = styled.input`
   border: 1px solid black;
   font-size: 16px;
   margin: 10px;
   padding: 5px;
 `;
 
-export const loginPassword = styled.input`
+export const signUpPassword = styled.input`
   border: 1px solid black;
   font-size: 16px;
   margin: 10px;
   padding: 5px;
 `;
 
-export const loginSubmit = styled.button`
+export const signUpSubmit = styled.button`
   background-color: black;
   color: white;
   width: 172px;
@@ -45,7 +45,7 @@ export const loginSubmit = styled.button`
   }
 `;
 
-export const goToSignUp = styled.div`
+export const goToLogin = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,7 @@ export const goToSignUp = styled.div`
   margin-top: 15px;
 `;
 
-export const goToSignUpSubmit = styled.button`
+export const goToLoginSubmit = styled.button`
   color: white;
   background-color: black;
   width: 172px;
