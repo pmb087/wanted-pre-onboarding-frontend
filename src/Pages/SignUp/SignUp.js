@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./SignUp.Style.js";
+import { API } from "../../config.js";
 
 function SignUp() {
   const [inputValue, setInputValue] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-
-  const BASE_URL =
-    "http://ec2-3-38-135-202.ap-northeast-2.compute.amazonaws.com:8000";
 
   const handleInput = (event) => {
     const { value, name } = event.target;
@@ -27,7 +25,7 @@ function SignUp() {
       return alert("비밀번호의 길이가 너무 짧습니다.");
     }
 
-    fetch(`${BASE_URL}/auth/signup`, {
+    fetch(API.SIGNUP, {
       method: "POST",
       headers: {
         "Content-Type": "Application/json",
@@ -40,6 +38,9 @@ function SignUp() {
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
+        if (res.message === "동일한 이메일이 이미 존재합니다.") {
+          return alert(res.message);
+        }
         localStorage.setItem("token", res.access_token);
         alert("회원가입이 완료되었습니다.");
         navigate("/");
