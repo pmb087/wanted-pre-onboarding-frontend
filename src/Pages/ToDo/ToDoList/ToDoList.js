@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import * as S from "./ToDoList.Style.js";
 import { API } from "../../../config.js";
+import * as S from "./ToDoList.Style.js";
 
 function ToDoList({ id, todo, isCompleted, getToDo }) {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -11,6 +11,28 @@ function ToDoList({ id, todo, isCompleted, getToDo }) {
   const handleInput = (event) => {
     const { value } = event.currentTarget;
     setToDoValue({ ...toDoValue, toDo: value });
+  };
+
+  const handleCompleted = () => {
+    setIsToDoCompleted((prev) => !prev);
+  };
+
+  const deleteTodo = () => {
+    fetch(`${API.TODO}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    setTimeout(() => {
+      getToDo();
+    }, 200);
+  };
+
+  const updateMode = () => {
+    setIsUpdating(true);
+    setToDoValue({ toDo: todo });
+    setCurrentCompleted(isCompleted);
   };
 
   const updateTodo = () => {
@@ -28,18 +50,7 @@ function ToDoList({ id, todo, isCompleted, getToDo }) {
     setTimeout(() => {
       getToDo();
     }, 200);
-  };
-
-  const deleteTodo = (id) => {
-    fetch(`${API.TODO}/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    setTimeout(() => {
-      getToDo();
-    }, 200);
+    setIsUpdating(false);
   };
 
   const updateCancel = () => {
@@ -47,6 +58,7 @@ function ToDoList({ id, todo, isCompleted, getToDo }) {
     setToDoValue({ toDo: "" });
     setIsToDoCompleted(currentCompleted);
   };
+
   return (
     <S.toDoMapWrap>
       <S.toDoList>
@@ -55,7 +67,7 @@ function ToDoList({ id, todo, isCompleted, getToDo }) {
         ) : (
           <S.toDoIsCompletedCheck
             isCompleted={isToDoCompleted}
-            onClick={() => setIsToDoCompleted((prev) => !prev)}
+            onClick={handleCompleted}
           />
         )}
         <S.toDoContent>
@@ -69,27 +81,12 @@ function ToDoList({ id, todo, isCompleted, getToDo }) {
       <S.toDoFunction>
         {!isUpdating ? (
           <>
-            <S.updateTodo
-              onClick={() => {
-                setIsUpdating(true);
-                setToDoValue({ toDo: todo });
-                setCurrentCompleted(isCompleted);
-              }}
-            >
-              수정
-            </S.updateTodo>
-            <S.deleteTodo onClick={() => deleteTodo(id)}>삭제</S.deleteTodo>
+            <S.updateTodo onClick={updateMode}>수정</S.updateTodo>
+            <S.deleteTodo onClick={deleteTodo}>삭제</S.deleteTodo>
           </>
         ) : (
           <>
-            <S.updateComplete
-              onClick={() => {
-                updateTodo();
-                setIsUpdating(false);
-              }}
-            >
-              완료
-            </S.updateComplete>
+            <S.updateComplete onClick={updateTodo}>완료</S.updateComplete>
             <S.updateCancle onClick={updateCancel}>취소</S.updateCancle>
           </>
         )}

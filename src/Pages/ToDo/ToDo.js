@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as S from "./ToDo.Style.js";
-import { API } from "../../config.js";
 import ToDoList from "./ToDoList/ToDoList.js";
+import { API } from "../../config.js";
+import * as S from "./ToDo.Style.js";
 
 function ToDo() {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ function ToDo() {
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      navigate("/");
+      navigate("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -38,6 +38,9 @@ function ToDo() {
   };
 
   const createToDo = () => {
+    if (createToDoValue.toDo === "") {
+      return;
+    }
     fetch(API.TODO, {
       method: "POST",
       headers: {
@@ -65,11 +68,9 @@ function ToDo() {
             value={createToDoValue.toDo}
             onChange={handleInput}
           />
-          <S.toDoCreateButton onClick={() => createToDo()}>
-            등록하기
-          </S.toDoCreateButton>
+          <S.toDoCreateButton onClick={createToDo}>등록하기</S.toDoCreateButton>
         </S.toDoCreateWrap>
-        <S.toDoListWrap>
+        <div>
           {toDoList.map(({ id, todo, isCompleted }, index) => {
             return (
               <ToDoList
@@ -81,7 +82,7 @@ function ToDo() {
               />
             );
           })}
-        </S.toDoListWrap>
+        </div>
       </S.toDoInner>
     </S.toDo>
   );

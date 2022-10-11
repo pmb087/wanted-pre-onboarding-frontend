@@ -1,11 +1,30 @@
 import styled from "styled-components";
 
+export const toDoMapWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 10px 0;
+  width: 350px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 0 0.3rem 0.05rem #cccccc;
+`;
+
 export const toDoList = styled.div`
-  width: 250px;
   display: flex;
   align-items: center;
+  width: 250px;
   background-color: white;
   border-radius: 5px;
+`;
+
+export const toDoIsCompletedCheck = styled.div`
+  margin-left: 15px;
+  width: 20px !important;
+  height: 20px;
+  background-color: ${(props) => (props.isCompleted ? "#55aaaa" : "white")};
+  border: 2px solid #aaaaaa;
+  border-radius: 10px;
 `;
 
 export const toDoContent = styled.div`
@@ -13,13 +32,20 @@ export const toDoContent = styled.div`
   width: 80%;
 `;
 
-export const toDoIsCompletedCheck = styled.div`
-  background-color: ${(props) => (props.isCompleted ? "#55aaaa" : "white")};
-  margin-left: 15px;
-  width: 20px !important;
-  height: 20px;
-  border: 2px solid #aaaaaa;
-  border-radius: 10px;
+export const toDoContentText = styled.span`
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  &:hover {
+    color: #aa00cc;
+  }
+`;
+
+export const toDoContentInput = styled.input`
+  padding: 5px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 1rem;
 `;
 
 export const toDoFunction = styled.div`
@@ -66,28 +92,3 @@ export const deleteTodo = styled(buttonStyle)`
 export const updateComplete = styled(updateTodo)``;
 
 export const updateCancle = styled(deleteTodo)``;
-
-export const toDoMapWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  margin: 0 0 10px 0;
-  box-shadow: 0 0 0.3rem 0.05rem #cccccc;
-`;
-
-export const toDoContentText = styled.span`
-  font-size: 1.1rem;
-  font-weight: 500;
-
-  &:hover {
-    color: #aa00cc;
-  }
-`;
-
-export const toDoContentInput = styled.input`
-  padding: 5px;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  font-size: 1rem;
-`;
