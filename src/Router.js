@@ -6,7 +6,7 @@ import ToDo from "./Pages/ToDo/ToDo.js";
 
 function Router() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/wanted-pre-onboarding-frontend">
       <Routes>
         <Route path="/" element={<Redirect />} />
         <Route path="/:auth" element={<Auth />} />
