@@ -9,7 +9,7 @@ function Router() {
     <BrowserRouter basename="/wanted-pre-onboarding-frontend">
       <Routes>
         <Route path="/" element={<Redirect />} />
-        <Route path="/:auth" element={<Auth />} />
+        <Route path="/auth/:auth" element={<Auth />} />
         <Route path="/todo" element={<ToDo />} />
       </Routes>
     </BrowserRouter>

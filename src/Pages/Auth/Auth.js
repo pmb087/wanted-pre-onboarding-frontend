@@ -26,7 +26,7 @@ function Auth() {
   };
 
   const goToOtherAuth = () => {
-    authMode === "login" ? navigate("/signup") : navigate("/login");
+    authMode === "login" ? navigate("/auth/signup") : navigate("/auth/login");
   };
 
   const authValidation = (event) => {

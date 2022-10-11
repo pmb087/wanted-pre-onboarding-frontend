@@ -4,5 +4,5 @@ import { useNavigate } from "react-router-dom";
 export function Redirect() {
   const navigate = useNavigate();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => navigate("/login"), []);
+  useEffect(() => navigate("/auth/login"), []);
 }

@@ -11,7 +11,7 @@ function ToDo() {
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
-      navigate("/login");
+      navigate("/auth/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
